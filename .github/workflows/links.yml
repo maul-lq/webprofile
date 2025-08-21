@@ -3,6 +3,8 @@ name: Links
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
   schedule:
     - cron: "00 18 * * *"
@@ -56,7 +58,6 @@ jobs:
       - name: Build Next.js (static export via next.config)
         run: |
           ${{ steps.detect-package-manager.outputs.build_cmd }}
-          ${{ steps.detect-package-manager.outputs.export_cmd }}
 
       - name: Prepare site folder to match GitHub Pages basePath
         run: |
