@@ -27,7 +27,7 @@ jobs:
 
       # Serve the built site locally and check for broken links/images
       - name: Install lychee (link checker)
-        run: curl -LSfs https://github.com/lycheeverse/lychee/releases/latest/download/lychee-linux-x86_64.tar.gz | tar xz -C /usr/local/bin
+        run: curl -LSfs https://github.com/lycheeverse/lychee/releases/download/v0.14.0/lychee-linux-x86_64.tar.gz | tar xz -C /usr/local/bin
 
       - name: Run Lychee on build output
         run: |
