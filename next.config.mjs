@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // output: 'export',
+    // enable the static HTML exporter (next build will produce out/)
+    output: 'export',
     basePath: '/webprofilebaim',
     assetPrefix: '/webprofilebaim/',
 };
