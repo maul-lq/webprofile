@@ -32,6 +32,7 @@ jobs:
       - name: Run Lychee on build output
         run: |
           # Scan the .next/static and public directories for broken links/images
+      # Scan the .next/static and public directories for broken links/images
       - name: Run Lychee on build output
         uses: lycheeverse/lychee-action@v1.9.1
         with:
