@@ -1,0 +1,41 @@
+name: Check Broken Links and Images
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install dependencies for Next.js (to build the site)
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      # Serve the built site locally and check for broken links/images
+      - name: Install lychee (link checker)
+        run: curl -LSfs https://github.com/lycheeverse/lychee/releases/download/v0.14.0/lychee-linux-x86_64.tar.gz | tar xz -C /usr/local/bin
+      - name: Run Lychee on build output
+        run: |
+          # Scan the .next/static and public directories for broken links/images
+      # Scan the .next/static and public directories for broken links/images
+        uses: lycheeverse/lychee-action@v1.9.1
+        with:
+          args: --verbose .next/static public
+
+      # Optionally, you can scan the entire repo as well:
+      # - name: Run Lychee on all files
+      #   run: lychee --verbose ./
