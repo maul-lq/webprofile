@@ -32,16 +32,30 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build site
-        run: npm run build
+      - name: Build and export Next.js site
+        run: |
+          npx next build
+          npx next export
+
+      - name: Prepare site folder to match GitHub Pages basePath
+        run: |
+          mkdir -p site/webprofilebaim
+          cp -r out/* site/webprofilebaim/
+
+      - name: Start static server
+        run: |
+          # start a simple static server so absolute paths like /webprofilebaim/* resolve
+          npx http-server site -p 8080 -c-1 &>/dev/null &
+          sleep 1
 
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: "--base . --cache --max-cache-age 1d public .next/static"
+          # point lychee at the served site; absolute paths will resolve under /webprofilebaim
+          args: "--base http://localhost:8080 --cache --max-cache-age 1d site/webprofilebaim"
           fail: false
 
       - name: Create Issue From File
