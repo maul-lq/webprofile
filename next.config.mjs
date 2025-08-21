@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    basePath: '/webprofilebaim',
+    basePath: '/webprofile',
     images: { unoptimized: true } // ensure static-friendly images
 };
 
