@@ -2,7 +2,7 @@
 const nextConfig = {
     output: 'export',
     basePath: '/webprofilebaim',
-    assetPrefix: '/webprofilebaim/'
+    images: { unoptimized: true } // ensure static-friendly images
 };
 
 export default nextConfig;
